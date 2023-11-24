@@ -1,0 +1,16 @@
+{
+    "name": "veljkoradenkovic/kafka-queue",
+    "description": "kafka php connector and queue manager",
+    "autoload": {
+        "psr-4": {
+            "Veljkoradenkovic\\KafkaQueue\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Veljko Radenkovic",
+            "email": "veljko.radenkovic@gmail.com"
+        }
+    ],
+    "require": {}
+}
