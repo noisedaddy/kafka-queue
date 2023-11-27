@@ -12,5 +12,7 @@
             "email": "veljko.radenkovic@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "laravel/framework": "^8.50.0"
+    }
 }

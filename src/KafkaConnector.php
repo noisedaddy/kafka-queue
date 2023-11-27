@@ -24,7 +24,6 @@ class KafkaConnector implements ConnectorInterface
 
         $producer = new \RdKafka\Producer($conf);
 
-
         $conf->set('group.id', $config['group_id']);
         $conf->set('auto.offset.reset', 'earliest');
         $conf->set('enable.partition.eof', 'true');
