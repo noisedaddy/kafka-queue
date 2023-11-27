@@ -1,5 +1,5 @@
 {
-    "name": "veljkoradenkovic/kafka-queue",
+    "name": "noisedaddy/kafka-queue",
     "description": "kafka php connector and queue manager",
     "autoload": {
         "psr-4": {
