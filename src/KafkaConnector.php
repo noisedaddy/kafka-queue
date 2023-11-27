@@ -2,7 +2,6 @@
 
 namespace Kafka;
 
-use App\Queues\KafkaQueue;
 use Illuminate\Queue\Connectors\ConnectorInterface;
 use Symfony\Component\VarDumper\Caster\RdKafkaCaster;
 
