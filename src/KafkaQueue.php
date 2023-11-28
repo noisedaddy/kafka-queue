@@ -42,13 +42,13 @@ class KafkaQueue extends Queue implements QueueContract
         echo "Kafka Queue: POP\n";
 
         try {
-//            $topic = $this->consumer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
-//            $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
+            $topic = $this->consumer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
+            $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
 
-            $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
-            $message = $this->consumer->consume(120*1000);
+//            $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
+//            $message = $this->consumer->consume(120*1000);
 
-//            $message = $topic->consume(120*1000);
+            $message = $topic->consume(120*1000);
 
             var_dump($message);
             switch ($message->err) {
