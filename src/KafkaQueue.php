@@ -42,9 +42,17 @@ class KafkaQueue extends Queue implements QueueContract
         echo "Kafka Queue: POP\n";
 
         try {
-            $topic = $this->consumer->newTopic("default");
+
+            $topicConf = new \RdKafka\TopicConf();
+            $topicConf->set('auto.commit.interval.ms', 100);
+            $topicConf->set('auto.offset.reset', 'smallest');
+
+            $topic = $this->consumer->newTopic("test", $topicConf);
             $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
             $message = $topic->consume(0, 120*10000);
+//            $topic = $this->consumer->newTopic("default");
+//            $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
+//            $message = $topic->consume(0, 120*10000);
 
 //            $topicConf = new \RdKafka\TopicConf();
 //            $topicConf->set('auto.commit.interval.ms', 100);
