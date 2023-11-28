@@ -43,7 +43,7 @@ class KafkaQueue extends Queue implements QueueContract
 
         try {
             $topic = $this->consumer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
-            $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
+            $message = $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
 
 //            $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
 //            $message = $this->consumer->consume(120*1000);
