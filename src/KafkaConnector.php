@@ -21,13 +21,14 @@ class KafkaConnector implements ConnectorInterface
             $conf->set('sasl.username', $config['sasl_username']);
             $conf->set('sasl.password', $config['sasl_password']);
 
-            $producer = new \RdKafka\Producer($conf);
+            $producer = new \RdKafka\KafkaProducer($conf);
 
             $conf->set('group.id', $config['group_id']);
             $conf->set('auto.offset.reset', 'earliest');
             $conf->set('enable.partition.eof', 'true');
 
-            $consumer = new \RdKafka\Consumer($conf);
+            $consumer = new \RdKafka\KafkaConsumer($conf);
+            $consumer->addBrokers("127.0.0.1");
 
             return new KafkaQueue($consumer, $producer);
         } catch (\Exception $exception) {
