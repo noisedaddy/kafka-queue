@@ -3,7 +3,6 @@
 namespace Kafka;
 
 use Illuminate\Queue\Connectors\ConnectorInterface;
-use Symfony\Component\VarDumper\Caster\RdKafkaCaster;
 
 class KafkaConnector implements ConnectorInterface
 {
