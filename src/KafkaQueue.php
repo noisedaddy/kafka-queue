@@ -48,7 +48,7 @@ class KafkaQueue extends Queue implements QueueContract
 //            $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
 //            $message = $this->consumer->consume(120*1000);
 
-            $message = $topic->consume(120*1000);
+//            $message = $topic->consume(120*1000);
 
             var_dump($message);
             switch ($message->err) {
