@@ -39,6 +39,8 @@ class KafkaQueue extends Queue implements QueueContract
 
         $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
 
+        echo $queue ?? getenv('KAFKA_QUEUE');
+
         try {
 
             $message = $this->consumer->consume(120*1000);
@@ -55,7 +57,9 @@ class KafkaQueue extends Queue implements QueueContract
                     echo "Timed out\n";
                     break;
                 default:
+                    echo "exception\n";
                     throw new \Exception($message->errstr(), $message->err);
+                    break;
             }
 
         } catch (\Exception $exception) {
