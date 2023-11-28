@@ -14,7 +14,7 @@ class KafkaConnector implements ConnectorInterface
     public function connect(array $config)
     {
         try {
-            $conf = new RdKafka\Conf();
+            $conf = new \RdKafka\Conf();
             $conf->set('bootstrap.servers', $config['bootstrap_servers']);
             $conf->set('security.protocol', $config['security_protocol']);
             $conf->set('sasl.mechanism', $config['sasl_mechanisms']);
@@ -27,7 +27,7 @@ class KafkaConnector implements ConnectorInterface
             $conf->set('auto.offset.reset', 'earliest');
             $conf->set('enable.partition.eof', 'true');
 
-            $consumer = new RdKafka\Consumer($conf);
+            $consumer = new \RdKafka\Consumer($conf);
 
             return new KafkaQueue($consumer, $producer);
         } catch (\Exception $exception) {
