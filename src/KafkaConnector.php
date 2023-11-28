@@ -28,6 +28,7 @@ class KafkaConnector implements ConnectorInterface
             $conf->set('enable.partition.eof', 'true');
 
             $consumer = new \RdKafka\Consumer($conf);
+//            $consumer = new \RdKafka\KafkaConsumer($conf);
             $consumer->addBrokers("127.0.0.1");
 
             return new KafkaQueue($consumer, $producer);
