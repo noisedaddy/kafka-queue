@@ -18,9 +18,13 @@ class KafkaQueue extends Queue implements QueueContract
     public function push($job, $data = '', $queue = null)
     {
         echo "Kafka Queue: PUSH\n";
-        $topic = $this->producer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
-        $topic->produce(RD_KAFKA_PARTITION_UA, 0,serialize($job));
-        $this->producer->flush(1000);
+        try {
+            $topic = $this->producer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
+            $topic->produce(RD_KAFKA_PARTITION_UA, 0,serialize($job));
+            $this->producer->flush(1000);
+        } catch (\Exception $exception) {
+            var_dump($exception);
+        }
     }
 
     public function pushRaw($payload, $queue = null, array $options = [])
