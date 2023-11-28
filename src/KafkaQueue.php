@@ -79,7 +79,8 @@ class KafkaQueue extends Queue implements QueueContract
 //            $message = $topic->consume(120*1000);
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
-                    var_dump($message->payload);
+                    $job = unserialize($message->payload);
+                    $job->handle();
                     break;
                 case RD_KAFKA_RESP_ERR__PARTITION_EOF:
                     var_dump("No more messages; will wait for more\n");
