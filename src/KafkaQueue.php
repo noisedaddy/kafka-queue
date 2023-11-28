@@ -47,7 +47,7 @@ class KafkaQueue extends Queue implements QueueContract
             $topicConf->set('auto.commit.interval.ms', 100);
             $topicConf->set('auto.offset.reset', 'smallest');
 
-            $topic = $this->consumer->newTopic("test", $topicConf);
+            $topic = $this->consumer->newTopic("default", $topicConf);
             $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
             $message = $topic->consume(0, 120*10000);
 //            $topic = $this->consumer->newTopic("default");
