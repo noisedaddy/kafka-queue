@@ -41,7 +41,7 @@ class KafkaQueue extends Queue implements QueueContract
     {
         echo "Kafka Queue: POP\n";
 
-        try {
+//        try {
 
             $topicConf = new \RdKafka\TopicConf();
             $topicConf->set('auto.commit.interval.ms', 100);
@@ -93,9 +93,9 @@ class KafkaQueue extends Queue implements QueueContract
                     break;
             }
 
-        } catch (\Exception $exception) {
-            var_dump($exception);
-        }
+//        } catch (\Exception $exception) {
+//            var_dump($exception);
+//        }
 
     }
 }
