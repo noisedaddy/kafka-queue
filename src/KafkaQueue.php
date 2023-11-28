@@ -17,6 +17,7 @@ class KafkaQueue extends Queue implements QueueContract
 
     public function push($job, $data = '', $queue = null)
     {
+        echo "Kafka Queue: PUSH\n";
         $topic = $this->producer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
         $topic->produce(RD_KAFKA_PARTITION_UA, 0,serialize($job));
         $this->producer->flush(1000);
@@ -34,6 +35,8 @@ class KafkaQueue extends Queue implements QueueContract
 
     public function pop($queue = null)
     {
+        echo "Kafka Queue: POP\n";
+
         $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
 
         try {
