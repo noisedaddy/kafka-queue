@@ -42,15 +42,29 @@ class KafkaQueue extends Queue implements QueueContract
         echo "Kafka Queue: POP\n";
 
         try {
-            $topic = $this->consumer->newTopic($queue ?? getenv('KAFKA_QUEUE'));
-            $message = $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
+            $topicConf = new \RdKafka\TopicConf();
+            $topicConf->set('auto.commit.interval.ms', 100);
+
+// Set the offset store method to 'file'
+            $topicConf->set('offset.store.method', 'broker');
+
+// Alternatively, set the offset store method to 'none'
+// $topicConf->set('offset.store.method', 'none');
+
+// Set where to start consuming messages when there is no initial offset in
+// offset store or the desired offset is out of range.
+// 'earliest': start from the beginning
+            $topicConf->set('auto.offset.reset', 'earliest');
+            $topic = $this->consumer->newTopic($queue ?? getenv('KAFKA_QUEUE'),$topicConf);
+//            $message = $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
 
 //            $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
 //            $message = $this->consumer->consume(120*1000);
 
 //            $message = $topic->consume(120*1000);
+            $topic->consumeStart(0, RD_KAFKA_OFFSET_STORED);
 
-            var_dump($message);
+            $message = $topic->consume(120*1000);
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
                     var_dump($message->payload);
