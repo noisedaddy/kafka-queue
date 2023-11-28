@@ -39,7 +39,7 @@ class KafkaQueue extends Queue implements QueueContract
 
         $this->consumer->subscribe($queue ?? getenv('KAFKA_QUEUE'));
 
-        echo $queue ?? getenv('KAFKA_QUEUE');
+        var_dump($queue ?? getenv('KAFKA_QUEUE'));
 
         try {
 
